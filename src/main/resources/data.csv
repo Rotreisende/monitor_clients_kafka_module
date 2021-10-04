@@ -1,0 +1,3 @@
+hashId,loadDate,recordId,clientSin,surname,name,patronymic,birthDate,birthPlace,primaryIdType,primaryIdNumber,deleteFlag
+123,12122019,12,222,иванов,иван,иванович,12122019,саратов,12,0123456789,0
+123,12122021,33,111,петров,петр,петрович,12122021,москва,12,0123456789,1

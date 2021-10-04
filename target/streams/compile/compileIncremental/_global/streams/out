@@ -1,0 +1,20 @@
+[debug] [zinc] IncrementalCompile -----------
+[debug] IncrementalCompile.incrementalCompile
+[debug] previous = Stamps for: 0 products, 0 sources, 0 libraries
+[debug] current source = Set(${BASE}/kafka-playground/src/main/scala/Main.scala)
+[debug] > initialChanges = InitialChanges(Changes(added = Set(${BASE}/kafka-playground/src/main/scala/Main.scala), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())
+[debug] Full compilation, no sources in previous analysis.
+[debug] all 1 sources are invalidated
+[debug] Initial set of included nodes: 
+[debug] Recompiling all sources: number of invalidated sources > 50.0% of all sources
+[debug] compilation cycle 1
+[info] compiling 1 Scala source to C:\Users\sfisenko\Desktop\Scala\ReleaseSbtTest\kafka-playground\target\scala-2.12\classes ...
+[debug] Getting org.scala-sbt:compiler-bridge_2.12:1.5.7:compile for Scala 2.12.14
+[debug] [zinc] Running cached compiler 3f1e5008 for Scala compiler version 2.12.14
+[debug] [zinc] The Scala compiler is invoked with:
+[debug] 	-bootclasspath
+[debug] 	C:\Users\sfisenko\.jdks\corretto-1.8.0_302\jre\lib\resources.jar;C:\Users\sfisenko\.jdks\corretto-1.8.0_302\jre\lib\rt.jar;C:\Users\sfisenko\.jdks\corretto-1.8.0_302\jre\lib\sunrsasign.jar;C:\Users\sfisenko\.jdks\corretto-1.8.0_302\jre\lib\jsse.jar;C:\Users\sfisenko\.jdks\corretto-1.8.0_302\jre\lib\jce.jar;C:\Users\sfisenko\.jdks\corretto-1.8.0_302\jre\lib\charsets.jar;C:\Users\sfisenko\.jdks\corretto-1.8.0_302\jre\lib\jfr.jar;C:\Users\sfisenko\.jdks\corretto-1.8.0_302\jre\classes;C:\Users\sfisenko\.sbt\boot\scala-2.12.14\lib\scala-library.jar
+[debug] 	-classpath
+[debug] 	C:\Users\sfisenko\Desktop\Scala\ReleaseSbtTest\kafka-playground\target\scala-2.12\classes;C:\Users\sfisenko\Desktop\Scala\ReleaseSbtTest\avro-playground\target\scala-2.12\classes;C:\Users\sfisenko\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\apache\avro\avro\1.10.2\avro-1.10.2.jar;C:\Users\sfisenko\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\apache\kafka\kafka-clients\2.8.0\kafka-clients-2.8.0.jar;C:\Users\sfisenko\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\com\fasterxml\jackson\core\jackson-core\2.12.2\jackson-core-2.12.2.jar;C:\Users\sfisenko\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\com\fasterxml\jackson\core\jackson-databind\2.12.2\jackson-databind-2.12.2.jar;C:\Users\sfisenko\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\apache\commons\commons-compress\1.20\commons-compress-1.20.jar;C:\Users\sfisenko\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\slf4j\slf4j-api\1.7.30\slf4j-api-1.7.30.jar;C:\Users\sfisenko\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\com\github\luben\zstd-jni\1.4.9-1\zstd-jni-1.4.9-1.jar;C:\Users\sfisenko\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\lz4\lz4-java\1.7.1\lz4-java-1.7.1.jar;C:\Users\sfisenko\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\xerial\snappy\snappy-java\1.1.8.1\snappy-java-1.1.8.1.jar;C:\Users\sfisenko\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\com\fasterxml\jackson\core\jackson-annotations\2.12.2\jackson-annotations-2.12.2.jar
+[debug] Scala compilation took 0.2783182 s
+[info] done compiling
