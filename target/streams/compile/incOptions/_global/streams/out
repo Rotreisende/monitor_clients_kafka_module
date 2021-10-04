@@ -1,7 +1,0 @@
-[debug] Created transactional ClassFileManager with tempDir = C:\Users\sfisenko\Desktop\Scala\ReleaseSbtTest\kafka-playground\target\scala-2.12\classes.bak
-[debug] About to delete class files:
-[debug] We backup class files:
-[debug] Registering generated classes:
-[debug] 	Main.class
-[debug] 	Main$.class
-[debug] Removing the temporary directory used for backing up class files: C:\Users\sfisenko\Desktop\Scala\ReleaseSbtTest\kafka-playground\target\scala-2.12\classes.bak
