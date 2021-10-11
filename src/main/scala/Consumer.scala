@@ -1,6 +1,6 @@
 import org.apache.kafka.clients.consumer.{ConsumerConfig, KafkaConsumer}
 import org.apache.kafka.common.serialization.{ByteArrayDeserializer, LongDeserializer}
-import ru.releaseSbtTest.user.User
+//import ru.releaseSbtTest.user.User
 import util.AvroDeserializer
 
 import java.time.Duration
@@ -27,7 +27,7 @@ object Consumer {
       try {
         val results = kafkaConsumer.poll(Duration.ofMillis(2000)).asScala
         results.foreach { record =>
-          println(s"key: ${record.key()}, value: ${AvroDeserializer.fromByteArray(User.SCHEMA$, record.value())}")
+          //println(s"key: ${record.key()}, value: ${AvroDeserializer.fromByteArray(User.SCHEMA$, record.value())}")
         }
       } catch {
         case e: Throwable => println(e.getCause)

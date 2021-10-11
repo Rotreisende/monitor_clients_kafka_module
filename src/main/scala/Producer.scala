@@ -1,9 +1,9 @@
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
 import org.apache.kafka.common.serialization.{ByteArraySerializer, LongSerializer}
-import ru.releaseSbtTest.user.User
-import util.AvroSerializer
+import org.apache.spark.sql.SparkSession
+import spark.DeequApp.readCsv
 
-import java.util.{Properties, UUID}
+import java.util.Properties
 
 object Producer {
   def prepareProducerProps(): Properties = {
@@ -21,12 +21,16 @@ object Producer {
 
   def main(args: Array[String]): Unit = {
     val producer = createProducer()
-    try {
-      val user = User(UUID.randomUUID().toString, "Ivanov", "Ivan", None, 18)
-      producer.send(new ProducerRecord[Long, Array[Byte]]("topic_1", 2, AvroSerializer.toByteArray(user)))
-      println("Send message")
-    } catch {
-      case e: Throwable => println(e.getCause)
-    }
+    implicit val sparkSession: SparkSession = ???
+
+    val errorsDf = readCsv("kafka-playground/src/main/resources/errors.csv")
+    val dataDf = readCsv("kafka-playground/src/main/resources/data.csv")
+//    try {
+//      val user = User(UUID.randomUUID().toString, "Ivanov", "Ivan", None, 18)
+//      producer.send(new ProducerRecord[Long, Array[Byte]]("topic_1", 2, AvroSerializer.toByteArray(user)))
+//      println("Send message")
+//    } catch {
+//      case e: Throwable => println(e.getCause)
+//    }
   }
 }
