@@ -2,16 +2,16 @@ package spark
 
 import CheckBuilder._
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.DataFrame
 
 object DeequApp extends App {
-  def getSparkSession() = {
+  val spark =
     SparkSession.builder()
       .master("local")
       .appName("suggestion")
       .getOrCreate()
-  }
 
-  def readCsv(path: String)(implicit spark: SparkSession) = {
+  def readCsv(path: String)(implicit spark: SparkSession): DataFrame = {
     spark.read
       .option("header", value = true)
       .option("sep", ",")
@@ -19,14 +19,11 @@ object DeequApp extends App {
       .csv(path)
   }
 
-  implicit val sparkSession: SparkSession = getSparkSession()
+  val errorsDf = readCsv("kafka-playground/src/main/resources/errors.csv")(spark)
+  val dataDf = readCsv("kafka-playground/src/main/resources/data.csv")(spark)
 
-  val errorsDf = readCsv("kafka-playground/src/main/resources/errors.csv")
-  val dataDf = readCsv("kafka-playground/src/main/resources/data.csv")
+  val result = dataDf.getCheckResult(errorsDf)(spark)
 
-  val result = getCheckResult(dataDf, errorsDf)
-
-  errorsDf.show()
-  dataDf.show()
-  result.show()
+  //dataDf.foreach(row => println(Instrument(errorsDf).validate(row)))// not work
+  //println(Instrument(errorsDf).validate(dataDf.collect().head))// work
 }

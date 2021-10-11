@@ -5,23 +5,27 @@ import com.amazon.deequ.{VerificationResult, VerificationRunBuilder, Verificatio
 import org.apache.spark.sql.{DataFrame, Encoder, Encoders, SparkSession}
 
 object CheckBuilder {
-  def getVerificationBuilder(dataFrame: DataFrame): VerificationRunBuilder = {
-    VerificationSuite()
-      .onData(dataFrame)
+  implicit class RichDataFrame(df: DataFrame) {
+    def getVerificationBuilder: VerificationRunBuilder = {
+      VerificationSuite()
+        .onData(df)
+    }
+
+    def getVerificationResult(checks: Seq[Check]): VerificationResult = {
+      getVerificationBuilder
+        .addChecks(checks)
+        .run()
+    }
+
+    def getCheckResult(errorDf: DataFrame)(implicit sparkSession: SparkSession): DataFrame = {
+      VerificationResult.checkResultsAsDataFrame(sparkSession, getVerificationResult(getChecks(errorDf)))
+    }
+
+    def getChecks(errorDf: DataFrame): Array[CheckWithLastConstraintFilterable] = {
+      implicit val encoder: Encoder[CheckWithLastConstraintFilterable] = Encoders.kryo[CheckWithLastConstraintFilterable]
+      errorDf.map(CheckInstrument.mapFunction).collect()
+    }
   }
 
-  def getVerificationResult(dataFrame: DataFrame)(checks: Seq[Check]): VerificationResult = {
-    getVerificationBuilder(dataFrame)
-      .addChecks(checks)
-      .run()
-  }
 
-  def getCheckResult(dataFrame: DataFrame, errorDf: DataFrame)(implicit sparkSession: SparkSession): DataFrame = {
-    VerificationResult.checkResultsAsDataFrame(sparkSession, getVerificationResult(dataFrame)(getChecks(errorDf)))
-  }
-
-  def getChecks(df: DataFrame): Array[CheckWithLastConstraintFilterable] = {
-    implicit val encoder: Encoder[CheckWithLastConstraintFilterable] = Encoders.kryo[CheckWithLastConstraintFilterable]
-    df.map(CheckInstrument().mapFunction).collect()
-  }
 }

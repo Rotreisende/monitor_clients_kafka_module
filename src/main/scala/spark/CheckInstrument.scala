@@ -1,25 +1,26 @@
 package spark
 
 import com.amazon.deequ.checks.{Check, CheckLevel, CheckWithLastConstraintFilterable}
-import org.apache.spark.sql.Row
+import org.apache.spark.sql.{DataFrame, Dataset, Row}
 
 import scala.util.matching.Regex
 
-case class CheckInstrument() extends Serializable {
+case object CheckInstrument extends Serializable {
+  val isEmptyValuePattern = "isEmpty"
+
   def mapFunction(row: Row): CheckWithLastConstraintFilterable = {
     val pattern = row.getString(2)
     pattern match {
-      case "isEmpty" => getCheck(s"${row.getString(1)}: ${row.getString(3)}", row.getString(0))
-      case _ => getCheck(s"${row.getString(1)}: ${row.getString(3)}", row.getString(0), pattern.r)
+      case value if value == isEmptyValuePattern => getCheck(s"${row.getString(1)}: ${row.getString(3)}", row.getString(0))
+      case _ => getCheck(s"${row.getString(1)}: ${row.getString(3)}", row.getString(0), Option(pattern.r))
     }
   }
 
-  def getCheck(description: String, header: String, pattern: Regex = null): CheckWithLastConstraintFilterable = {
+  def getCheck(description: String, header: String, pattern: Option[Regex] = None): CheckWithLastConstraintFilterable = {
     val check = createCheckBody(description)
-    if (pattern == null) {
-      addComplete(check, header)
-    } else {
-      addPattern(check, header, pattern)
+    pattern match {
+      case Some(pattern) => addPattern(check, header, pattern)
+      case None => addComplete(check, header)
     }
   }
 
